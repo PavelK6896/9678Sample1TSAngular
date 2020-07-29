@@ -14,6 +14,7 @@ export class Todo1Component implements OnInit {
   //this.onToggle.emit(id) -- если пробрасывание через корень
 
   public loading: boolean = true
+  public searchString: string =''
 
   //инжектим сервисе
   constructor(public todo1Service: Todo1Service) {
@@ -23,11 +24,10 @@ export class Todo1Component implements OnInit {
   ngOnInit(): void {
     //промисываем стрим и выполняем подписавшись
     this.todo1Service.fetchTodo2()
-      .pipe(delay(500))//rxjs set timeout
+     // .pipe(delay(500))//rxjs set timeout
       .subscribe(() => {
       this.loading = false;
-      console.log("eeeee")
-      console.log(this.todo1Service.todo2)
+        console.log("loding ")
     })
   }
 
@@ -38,5 +38,12 @@ export class Todo1Component implements OnInit {
 
   removeTodo(id: number) {
     this.todo1Service.removeTodo(id)
+    console.log("remove")
   }
+
+  todo1() {
+    this.todo1Service.todoChange()
+  }
+
+
 }

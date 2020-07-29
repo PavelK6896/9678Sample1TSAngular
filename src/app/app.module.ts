@@ -10,6 +10,7 @@ import {Page2Component} from "./page2/page2.component";
 import { Page3Component } from './page3/page3.component';
 import {HttpClientModule} from "@angular/common/http";
 import { TodoFormComponent } from './todo-form/todo-form.component';
+import {TodoFilterPipe} from "./shared/todo-filter.pipe";
 
 @NgModule({ // модуль1
   declarations: [
@@ -20,6 +21,7 @@ import { TodoFormComponent } from './todo-form/todo-form.component';
     Page1Component,
     Page3Component,
     TodoFormComponent,
+    TodoFilterPipe
 
   ],
   imports: [

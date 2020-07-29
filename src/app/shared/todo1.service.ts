@@ -15,7 +15,8 @@ export interface Todo1 {
 @Injectable({providedIn: 'root'})
 export class Todo1Service {
 
-  public todo1: Todo1[] = [
+  public todo2: Todo1[] = []
+  public todo3: Todo1[] = [
     {id: 1, title: 'купить хлеб', completed: false, date: new Date()},
     {id: 2, title: 'купить масло', completed: true, date: new Date()},
     {id: 3, title: 'купить пиво', completed: false, date: new Date()},
@@ -25,9 +26,13 @@ export class Todo1Service {
       completed: false,
       date: new Date()
     },
+    {id: 5, title: 'illo 1', completed: false, date: new Date()},
+    {id: 6, title: 'illo 2', completed: false, date: new Date()},
+
   ]
 
-  public todo2: Todo1[] = []
+  public todo1: Todo1[] = this.todo3
+
 
   constructor(private http: HttpClient) {
   }
@@ -35,9 +40,9 @@ export class Todo1Service {
   //тип стрима
   fetchTodo2(): Observable<Todo1[]> {
 // возвращает рчдс стрим
-    return this.http.get<Todo1[]>('https://jsonplaceholder.typicode.com/todos?_limit=3')
+    return this.http.get<Todo1[]>('https://jsonplaceholder.typicode.com/todos?_limit=15')
       // сохроняем результат
-      .pipe(tap(t => this.todo2 =  t))
+      .pipe(tap(t => this.todo2 = t))
   }
 
 
@@ -47,10 +52,27 @@ export class Todo1Service {
   }
 
   removeTodo(id: number) {
+
+    console.log("removeTodo", id)
     this.todo1 = this.todo1.filter(t => t.id != id)
+
+
   }
 
   addTodo(todo: Todo1) {
     this.todo1.push(todo)
   }
+
+
+  tt: boolean = false
+  todoChange() {
+    if (this.tt) {
+      this.todo1 = this.todo3
+      this.tt = false
+    }else {
+      this.todo1 = this.todo2
+      this.tt = true
+    }
+  }
+
 }

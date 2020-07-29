@@ -1,3 +1,18 @@
 npm install -g @angular/cli
 ng new 96my-first-project
-ng g c page1 - генерет компанет
+ng g c page1 - генерет компанет // --skipTests
+ng g p pipes/ex-ma //генерация пайпа в папке pipes
+ng g s services/log //сервис с названием log
+
+
+
+
+
+
+
+
+"schematics": {
+  "@schematics/angular:component": {
+    "style": "scss"
+  }
+},
