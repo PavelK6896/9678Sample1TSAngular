@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+@Component({// компанет1
+  selector: 'app-root',     // создает тег
+  templateUrl: './app.component.html', // путь к телу
+  styleUrls: ['./app.component.css'] // путь к стилям
 })
 export class AppComponent {
-  title = 'p9678Sample1TSAngular';
+  title = 'app-root';
+  n1 = 9999;
 }

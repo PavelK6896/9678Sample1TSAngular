@@ -1,0 +1,3 @@
+npm install -g @angular/cli
+ng new 96my-first-project
+ng g c page1 - генерет компанет

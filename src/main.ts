@@ -8,5 +8,6 @@ if (environment.production) {
   enableProdMode();
 }
 
+// главный файл завпускает модуль
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
