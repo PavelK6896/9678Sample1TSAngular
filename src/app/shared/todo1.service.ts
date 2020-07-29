@@ -1,4 +1,7 @@
 import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {tap} from "rxjs/operators";
 
 export interface Todo1 {
   id: number
@@ -24,13 +27,30 @@ export class Todo1Service {
     },
   ]
 
+  public todo2: Todo1[] = []
+
+  constructor(private http: HttpClient) {
+  }
+
+  //тип стрима
+  fetchTodo2(): Observable<Todo1[]> {
+// возвращает рчдс стрим
+    return this.http.get<Todo1[]>('https://jsonplaceholder.typicode.com/todos?_limit=3')
+      // сохроняем результат
+      .pipe(tap(t => this.todo2 =  t))
+  }
+
 
   onToggle(id: number) {// модифицируем стате
-    const idx = this.todo1.findIndex(t=> t.id === id)
+    const idx = this.todo1.findIndex(t => t.id === id)
     this.todo1[idx].completed = !this.todo1[idx].completed
   }
 
   removeTodo(id: number) {
     this.todo1 = this.todo1.filter(t => t.id != id)
+  }
+
+  addTodo(todo: Todo1) {
+    this.todo1.push(todo)
   }
 }

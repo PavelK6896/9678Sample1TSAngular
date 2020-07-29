@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Todo1, Todo1Service} from "../shared/todo1.service";
+import {Component, OnInit} from '@angular/core';
+import {Todo1Service} from "../shared/todo1.service";
+import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-todo1',
@@ -12,10 +13,22 @@ export class Todo1Component implements OnInit {
   // @Output() onToggle: EventEmitter<number> = new EventEmitter();
   //this.onToggle.emit(id) -- если пробрасывание через корень
 
+  public loading: boolean = true
+
   //инжектим сервисе
-  constructor(public todo1Service: Todo1Service) { }
+  constructor(public todo1Service: Todo1Service) {
+  }
+
 
   ngOnInit(): void {
+    //промисываем стрим и выполняем подписавшись
+    this.todo1Service.fetchTodo2()
+      .pipe(delay(500))//rxjs set timeout
+      .subscribe(() => {
+      this.loading = false;
+      console.log("eeeee")
+      console.log(this.todo1Service.todo2)
+    })
   }
 
   onChange(id: number) {

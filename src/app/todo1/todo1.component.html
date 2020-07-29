@@ -1,19 +1,23 @@
-<ul class="c" *ngIf="todo1Service.todo1.length; else noTodo1" >
-  <li *ngFor="let todo of todo1Service.todo1; let i = index">
+<div *ngIf="!loading">
 
-    <!--    [class.done] привязка класса стиля к стату-->
-    <label [class.done]="todo.completed">
-      <!--       [checked] привязка стейта (change)-сабытие -->
-      <input type="checkbox" [checked]="todo.completed" (change)="onChange(todo.id)">
-      <strong>{{i + 1}}</strong>
-      <div class="t">{{todo.title}}</div>
-    </label>
-    <small>{{todo.date | date: 'medium'}}</small>
-    <button class="rm" (click)="removeTodo(todo.id)" >&times;</button>
-  </li>
-</ul>
+  <ul class="c" *ngIf="todo1Service.todo1.length; else noTodo1">
+    <li *ngFor="let todo of todo1Service.todo1; let i = index">
 
-<!--// копанет и имя -->
-<ng-template #noTodo1>
-  <p style="text-align: center">No todo now - сейчас!</p>
-</ng-template>
+      <!--    [class.done] привязка класса стиля к стату-->
+      <label [class.done]="todo.completed">
+        <!--       [checked] привязка стейта (change)-сабытие -->
+        <input type="checkbox" [checked]="todo.completed" (change)="onChange(todo.id)">
+        <strong>{{i + 1}}</strong>
+        <div class="t">{{todo.title}}</div>
+      </label>
+      <small>{{todo.date | date: 'medium'}}</small>
+      <button class="rm" (click)="removeTodo(todo.id)">&times;</button>
+    </li>
+  </ul>
+
+  <!--// копанет и имя -->
+  <ng-template #noTodo1>
+    <p style="text-align: center">No todo now - сейчас!</p>
+  </ng-template>
+</div>
+<p *ngIf="loading">Loading...</p>
